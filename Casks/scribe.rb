@@ -10,9 +10,9 @@
 #   brew install --cask scribe      #  actualizar:  brew upgrade --cask scribe
 #
 # Nota sobre la firma: hoy el .app va firmado AD-HOC (sin Developer ID), así que
-# Gatekeeper lo pondría en cuarentena. El bloque `postflight` la retira tras
+# Gatekeeper lo pondría en cuarentena. El bloque `postflight_steps` la retira tras
 # instalar. Cuando la org tenga un certificado "Developer ID Application" y las
-# releases se notaricen (package-app.sh --notarize), ese postflight sobra y se
+# releases se notaricen (package-app.sh --notarize), ese postflight_steps sobra y se
 # puede borrar.
 cask "scribe" do
   version "0.1.14"
@@ -28,17 +28,15 @@ cask "scribe" do
     strategy :github_latest
   end
 
-  depends_on macos: :sonoma
   depends_on arch: :arm64
+  depends_on macos: :sonoma
 
   app "Scribe.app"
 
   # Firma ad-hoc: retiramos la cuarentena para que Gatekeeper no bloquee el .app.
   # Innecesario en cuanto las releases estén notarizadas con Developer ID.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Scribe.app"],
-                   sudo: false
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Scribe.app"]
   end
 
   uninstall quit: "com.540.scribe"
