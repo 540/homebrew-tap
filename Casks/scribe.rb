@@ -1,7 +1,7 @@
 # Cask de Homebrew para Scribe — canal de distribución del equipo (uso interno).
 #
 # Esta es la PLANTILLA (fuente de verdad). No la edites con versiones a mano:
-# scripts/release-cask.sh rellena 0.1.14 y 2c8eb7cc9556f0cf5996906961fce4def70e9e7d5e81fe7182cb520615794b62 a partir
+# scripts/release-cask.sh rellena 0.1.15 y d31c0722ebf9eb8d21dd8b1c1f7a1e1e69c33d13ea785f2aad655e34c8a49a12 a partir
 # del .zip generado por scripts/package-app.sh y publica el resultado en el tap
 # público 540/homebrew-tap (Casks/scribe.rb).
 #
@@ -15,8 +15,8 @@
 # releases se notaricen (package-app.sh --notarize), ese postflight_steps sobra y se
 # puede borrar.
 cask "scribe" do
-  version "0.1.14"
-  sha256 "2c8eb7cc9556f0cf5996906961fce4def70e9e7d5e81fe7182cb520615794b62"
+  version "0.1.15"
+  sha256 "d31c0722ebf9eb8d21dd8b1c1f7a1e1e69c33d13ea785f2aad655e34c8a49a12"
 
   url "https://github.com/540/homebrew-tap/releases/download/v#{version}/Scribe-#{version}.zip"
   name "Scribe"
